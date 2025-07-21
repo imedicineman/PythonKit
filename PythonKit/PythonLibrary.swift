@@ -56,7 +56,13 @@ public struct PythonLibrary {
     private static var isPythonLibraryLoaded = false
     private static var _pythonLibraryHandle: UnsafeMutableRawPointer?
     private static var pythonLibraryHandle: UnsafeMutableRawPointer? {
-        try! PythonLibrary.loadLibrary()
+        //try! PythonLibrary.loadLibrary()
+        do {
+    try PythonLibrary.loadLibrary()
+} catch {
+    fatalError("🔴 Python library failed to load: \(error)")
+}
+
         return self._pythonLibraryHandle
     }
 
